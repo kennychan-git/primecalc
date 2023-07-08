@@ -2,6 +2,7 @@ import math
 import time
 from multiprocessing import Pool, freeze_support
 
+
 def is_prime(num):
     # Check if number is less than 2
     if num < 2:
@@ -22,6 +23,7 @@ def is_prime(num):
     # If number is not divisible by any integer, it is prime
     return True
 
+
 def factorize_chunk(args):
     num, start, end = args
     factors = []
@@ -30,6 +32,7 @@ def factorize_chunk(args):
             factors.append(i)
             factors.append(num // i)
     return factors
+
 
 def factorize(num):
     factors = []
@@ -44,27 +47,34 @@ def factorize(num):
         pool.join()
         factors = [factor for sublist in results for factor in sublist]
     factors = list(set(factors))  # Remove duplicates
-    num_factors = len(factors)
-    return factors, num_factors
-if __name__ == '__main__':
-    freeze_support()
+    factors.sort()
+    return factors
 
-    # Prompt user for input
-    num = int(input("Enter a positive integer to check if it is a prime number: "))
 
-    # Start the timer
-    start_time = time.time()
+if __name__ == "__main__":
+    while True:
+        # Prompt user for input
+        num = int(input("Enter a positive integer to check if it is a prime number: "))
 
-    # Check if input number is prime
-    if is_prime(num):
-        print(f"{num} is a prime number.")
-    else:
-        factors, num_factors = factorize(num)
-        print(f"{num} is not a prime number.")
-        print(f"Factors of {num}: {factors}")
-        print(f"Number of factors: {num_factors}")
+        # Start the timer
+        start_time = time.time()
 
-    # Calculate and print the time elapsed
-    end_time = time.time()
-    elapsed_time = end_time - start_time
-    print(f"Time elapsed: {elapsed_time} seconds.")
+        # Check if input number is prime
+        if is_prime(num):
+            print(f"{num} is a prime number.")
+        else:
+            factors = factorize(num)
+            print(f"{num} is not a prime number.")
+            print("Factors of", num, ":")
+            for factor in factors:
+                print(factor)
+
+        # Calculate and print the time elapsed
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        print(f"Time elapsed: {elapsed_time} seconds.")
+
+        # Prompt for retry or exit
+        retry = input("Press 'r' to retry or Enter to exit: ")
+        if retry != 'r':
+            break
