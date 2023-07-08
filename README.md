@@ -2,10 +2,10 @@
 This Python script allows you to check if a given positive integer is a prime number. If the number is not prime, it also provides the factors of that number.
 
 ## Prerequisites
--Python 3.x
--multiprocessing module
--math module
--time module
+- Python 3.x
+- multiprocessing module
+- math module
+- time module
 
 ## Usage
 1. Clone the repository or download the script file. 
