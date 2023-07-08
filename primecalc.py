@@ -65,9 +65,7 @@ if __name__ == "__main__":
         else:
             factors = factorize(num)
             print(f"{num} is not a prime number.")
-            print("Factors of", num, ":")
-            for factor in factors:
-                print(factor)
+            print("Factors of", num, ":", factors)
 
         # Calculate and print the time elapsed
         end_time = time.time()
